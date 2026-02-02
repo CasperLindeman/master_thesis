@@ -1,3 +1,7 @@
+module Fluxes
+
+export flux, dflux, godunov_flux, demand, supply, maxwavespeed
+
 @inline flux(rho::Float64) = rho * (1.0 - rho)
 
 @inline dflux(rho::Float64) = 1.0 - 2.0 * rho
@@ -14,3 +18,5 @@ end
 @inline supply(rho::Float64) = flux(rho)
 
 @inline maxwavespeed(rho::Float64) = abs(dflux(rho))
+
+end # module Fluxes

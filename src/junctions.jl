@@ -1,3 +1,10 @@
+module Junctions
+
+export Junction, compute_junction_fluxes
+
+using ..Roads: Road
+using ..Fluxes: demand, supply
+
 struct Junction
     incoming::Vector{Int}
     outgoing::Vector{Int}
@@ -7,8 +14,8 @@ function compute_junction_fluxes(
     j::Junction,
     roads::Vector{Road}
 )
-    D = [demand(roads[i].ρ[end]) for i in j.incoming]
-    S = [supply(roads[i].ρ[1])  for i in j.outgoing]
+    D = [demand(roads[i].rho[end]) for i in j.incoming]
+    S = [supply(roads[i].rho[1])  for i in j.outgoing]
 
     total_flux = min(sum(D), sum(S))
 
@@ -18,3 +25,5 @@ function compute_junction_fluxes(
     return fin .* ones(length(j.incoming)),
            fout .* ones(length(j.outgoing))
 end
+
+end # module Junctions

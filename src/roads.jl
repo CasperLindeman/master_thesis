@@ -1,7 +1,13 @@
+module Roads
+
+export Road, make_road, cfl_dt, update_road!
+
+using ..Fluxes: maxwavespeed, godunov_flux
+
 struct Road
     id::Int
     dx::Float64
-    rho:Vector{Float64}
+    rho::Vector{Float64}
 end
 
 function make_road(id::Int, L::Float64, N::Int, rho_0::Function)
@@ -40,3 +46,5 @@ function update_road!(
 
     return nothing
 end
+
+end # module Roads
